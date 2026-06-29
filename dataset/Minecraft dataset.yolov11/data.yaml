@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 23
+names: ['Sheep', 'Torch', 'Tree', 'cablestone', 'coal ore', 'cow', 'creeper', 'diamond ore', 'dirt', 'flower', 'gold ore', 'iron ore', 'skeleton', 'stone', 'stove', 'verstak', 'villager', 'water', 'wood', 'wood 2', 'wood 3', 'wood 4', 'zombie']
+
+roboflow:
+  workspace: shoxs-workspace-u4opg
+  project: minecraft-dataset-cjpth
+  version: dataset
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/shoxs-workspace-u4opg/minecraft-dataset-cjpth/dataset/dataset
