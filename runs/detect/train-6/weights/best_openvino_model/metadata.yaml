@@ -1,0 +1,45 @@
+description: Ultralytics YOLO11n model trained on Minecraftdataset.yolov11/data.yaml
+author: Ultralytics
+date: '2026-07-01T20:35:44.884720'
+version: 8.4.80
+license: AGPL-3.0 License (https://ultralytics.com/license)
+docs: https://docs.ultralytics.com
+stride: 32
+task: detect
+batch: 1
+imgsz:
+- 640
+- 640
+names:
+  0: Sheep
+  1: Torch
+  2: Tree
+  3: cablestone
+  4: coal ore
+  5: cow
+  6: creeper
+  7: diamond ore
+  8: dirt
+  9: flower
+  10: gold ore
+  11: iron ore
+  12: skeleton
+  13: stone
+  14: stove
+  15: verstak
+  16: villager
+  17: water
+  18: wood
+  19: wood 2
+  20: wood 3
+  21: wood 4
+  22: zombie
+args:
+  data: null
+  batch: 1
+  fraction: 1.0
+  quantize: 16
+  dynamic: false
+  nms: false
+channels: 3
+end2end: false

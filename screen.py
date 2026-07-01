@@ -4,6 +4,11 @@ import mss
 import numpy as np
 import pygetwindow as gw
 from vision import MinecraftVision
+from controller import MinecraftController
+from ultralytics import YOLO
+
+controller = MinecraftController()
+model = YOLO("D:/Python project/first ai/Minecraft AI agent/runs/detect/train-6/weights/best_openvino_model")
 
 
 def get_minecraft_window():
@@ -49,11 +54,36 @@ def start_capture():
             frame = np.array(screenshot)
             frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
 
-            frame = cv2.resize(frame, (800, 600))
+            frame = cv2.resize(frame, (640, 480))
             # height, width = frame.shape[:2]
 
-            if frame_count % 3 == 0:
+            if frame_count % 30 == 0:
                 predictions = vision_agent.detect(frame)
+
+            results = model(frame, verbose=False)[0]
+
+            # Проверяем, что ИИ нашёл на картинке
+            for box in results.boxes:
+                class_id = int(box.cls[0])
+                class_name = model.names[class_id]
+                confidence = float(box.conf[0])
+
+                if confidence > 0.5:
+                    # Переводим в нижний регистр, чтобы точно совпало
+                    target = class_name.lower()
+
+                    # Если видит алмазы
+                    if target == "diamond ore" or target == "iron ore":
+                        print(f"Вижу алмазы ({confidence * 100:.1f}%)! Иду копать...")
+                        controller.move_forward(duration=1.0)
+                        controller.attack(duration=2.0)
+                        break
+                        # Если видит дерево
+                    elif target == "Tree" or target == "wood":
+                        print(f"Вижу дерево ({confidence * 100:.1f}%)! Иду рубить...")
+                        controller.move_forward(duration=1.0)
+                        controller.attack(duration=2.0)
+                        break
 
             # 3. Считаем FPS
             fps = 1 / (time.time() - last_time)
