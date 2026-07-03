@@ -47,7 +47,7 @@ class MinecraftController:
         input_mod.moveRel(move_x, 0)
 
     def use_item(self):
-        input_mod.click(button='right')
+        input_mod.click(button='left')
 
     def open_inventory(self):
         input_mod.press('e')
